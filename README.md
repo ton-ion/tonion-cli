@@ -1,2 +1,2 @@
 # opm
-OpenGem package manager
+Tonion package manager
