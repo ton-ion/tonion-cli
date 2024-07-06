@@ -1,10 +1,15 @@
 {
   "name": "tonion",
+  "bin": {
+    "tonion": "./dist/index.js"
+  },
   "version": "0.0.1",
   "description": "Tionion package manager and tools.",
   "main": " ",
   "scripts": {
-    "test": " "
+    "dev": "tsc -w",
+    "link": "yarn --global link",
+    "unlink": "yarn --global unlink tonion"
   },
   "repository": {
     "type": "git",
@@ -21,6 +26,7 @@
   "author": "Tonion team",
   "license": "MIT",
   "devDependencies": {
+    "@types/node": "^20.14.10",
     "typescript": "^5.5.3"
   }
 }
