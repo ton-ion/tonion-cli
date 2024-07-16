@@ -15,8 +15,12 @@ export function registerListCommand() {
 
       const registry = (await regResp.json()) as RegistryType;
 
+      console.log(registry)
+
       let num = 0;
       for (const providerKey in registry.Provider) {
+        console.log(providerKey)
+
         const provider = registry.Provider[providerKey];
 
         console.log(`Provider ${num} info:`);
