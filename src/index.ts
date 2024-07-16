@@ -3,6 +3,7 @@
 import { Command } from 'commander';
 import { registerCookCommand } from './commands/cook';
 import { registerGetCommand } from './commands/get';
+import { registerListCommand } from './commands/list';
 
 export const program = new Command();
 
@@ -13,5 +14,6 @@ program
 
 registerCookCommand();
 registerGetCommand();
+registerListCommand();
 
 program.parse(process.argv);

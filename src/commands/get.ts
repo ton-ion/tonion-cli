@@ -3,7 +3,6 @@ import { program } from '../index';
 export function registerGetCommand() {
   program
     .command('get <package>')
-    .action(() => {
-    })
+    .action(() => {})
     .description('Get a Tact package from the Tonion contracts repository.');
 }
