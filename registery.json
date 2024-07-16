@@ -1,21 +1,29 @@
 {
     "tonion": {
         "1.0": {
-            "traits": {
-                "utils/counter": {
-                    "Counter.tact": "https://raw.githubusercontent.com/ton-ion/tonion-contracts/main/contracts/traits/utils/Counter.tact"
+            "metadata": {
+                "status": "unstable",
+                "website": "https://tonion.tech",
+                "documents": "https://tonion.tech/docs"
+            },
+            "modules": {
+                "traits": {
+                    "utils/counter": {
+                        "Counter.tact": "https://raw.githubusercontent.com/ton-ion/tonion-contracts/main/contracts/traits/utils/Counter.tact"
+                    },
+                    "tokens/jetton": {
+                        "JettonMaster.tact": "https://raw.githubusercontent.com/ton-ion/tonion-contracts/main/contracts/traits/tokens/jetton/JettonMaster.tact",
+                        "JettonWallet.tact": "https://raw.githubusercontent.com/ton-ion/tonion-contracts/main/contracts/traits/tokens/jetton/JettonWallet.tact"
+                    },
+                    "tokens/jetton/extensions": {
+                        "MaxSupply.tact": "https://raw.githubusercontent.com/ton-ion/tonion-contracts/main/contracts/traits/tokens/jetton/extensions/MaxSupply.tact"
+                    },
+                    "access": {
+                        "AccessControl.tact": "https://raw.githubusercontent.com/ton-ion/tonion-contracts/main/contracts/traits/access/AccessControl.tact",
+                        "OwnableTransferable2Step.tact": "https://raw.githubusercontent.com/ton-ion/tonion-contracts/main/contracts/traits/access/OwnableTransferable2Step.tact"
+                    }
                 },
-                "tokens/jetton": {
-                    "JettonMaster.tact": "https://raw.githubusercontent.com/ton-ion/tonion-contracts/main/contracts/traits/tokens/jetton/JettonMaster.tact",
-                    "JettonWallet.tact": "https://raw.githubusercontent.com/ton-ion/tonion-contracts/main/contracts/traits/tokens/jetton/JettonWallet.tact"
-                },
-                "tokens/jetton/extensions": {
-                    "MaxSupply.tact": "https://raw.githubusercontent.com/ton-ion/tonion-contracts/main/contracts/traits/tokens/jetton/extensions/MaxSupply.tact"
-                },
-                "access": {
-                    "AccessControl.tact": "https://raw.githubusercontent.com/ton-ion/tonion-contracts/main/contracts/traits/access/AccessControl.tact",
-                    "OwnableTransferable2Step.tact": "https://raw.githubusercontent.com/ton-ion/tonion-contracts/main/contracts/traits/access/OwnableTransferable2Step.tact"
-                }
+                "contracts": {}
             }
         }
     }
