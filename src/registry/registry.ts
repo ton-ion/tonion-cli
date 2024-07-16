@@ -1,12 +1,10 @@
-export type RegistryType = {
-  Provider: Record<
-    string,
-    {
-      Metadata: MetadataType;
-      Version: Record<string, VersionType>;
-    }
-  >;
-};
+export type RegistryType = Record<
+  string,
+  {
+    Metadata: MetadataType;
+    Version: Record<string, VersionType>;
+  }
+>;
 
 export type VersionType = {
   Traits: Record<string, Record<string, string[]>>;

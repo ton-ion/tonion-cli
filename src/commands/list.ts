@@ -15,38 +15,38 @@ export function registerListCommand() {
 
       const registry = (await regResp.json()) as RegistryType;
 
-      console.log(registry)
+      console.log(registry['tonion']);
 
-      let num = 0;
-      for (const providerKey in registry.Provider) {
-        console.log(providerKey)
+      // let num = 0;
+      // for (const providerKey in registry.Provider) {
+      //   console.log(providerKey)
 
-        const provider = registry.Provider[providerKey];
+      //   const provider = registry.Provider[providerKey];
 
-        console.log(`Provider ${num} info:`);
-        console.log('Name:', providerKey);
-        console.log('Website:', provider?.Metadata.Website);
-        console.log('Documents:', provider?.Metadata.Document);
-        console.log('Status:', provider?.Metadata.Status);
+      //   console.log(`Provider ${num} info:`);
+      //   console.log('Name:', providerKey);
+      //   console.log('Website:', provider?.Metadata.Website);
+      //   console.log('Documents:', provider?.Metadata.Document);
+      //   console.log('Status:', provider?.Metadata.Status);
 
-        for (const versionsKey in provider?.Version) {
-          const version = provider.Version[versionsKey];
+      //   for (const versionsKey in provider?.Version) {
+      //     const version = provider.Version[versionsKey];
 
-          for (const traitsKey in version?.Traits) {
-            const traits = version.Traits[traitsKey];
-            for (const name in traits) {
-              console.log(name);
-            }
-          }
+      //     for (const traitsKey in version?.Traits) {
+      //       const traits = version.Traits[traitsKey];
+      //       for (const name in traits) {
+      //         console.log(name);
+      //       }
+      //     }
 
-          for (const contractsKey in version?.Contract) {
-            const contracts = version.Contract[contractsKey];
-            for (const name in contracts) {
-              console.log(name);
-            }
-          }
-        }
-      }
+      //     for (const contractsKey in version?.Contract) {
+      //       const contracts = version.Contract[contractsKey];
+      //       for (const name in contracts) {
+      //         console.log(name);
+      //       }
+      //     }
+      //   }
+      // }
     })
     .description('Shows the list of available modules from different providers.');
 }
