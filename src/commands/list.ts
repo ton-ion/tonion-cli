@@ -22,7 +22,7 @@ export function registerListCommand() {
         });
 
       if (!getRegistryResponse?.ok) {
-        console.log(chalk.red(`Can't get registry info.\nCheck registry at: ${r}`));
+        console.log(chalk.yellow(`Can't get registry info.\nCheck registry at: ${r}`));
         exit(1);
       }
 
@@ -30,10 +30,33 @@ export function registerListCommand() {
 
       const metadata = registry.tonion['metadata'] as Metadata;
 
-      console.log(`${metadata.name} contract registry:`);
-      console.log('Website:', metadata.website);
-      console.log('Documents:', metadata.documents);
-      console.log('Status:', metadata.status);
+      console.log(chalk.redBright.bold(`${metadata.name} contract registry:`));
+      console.log(chalk.blue('Website:'), chalk.white(metadata.website));
+      console.log(chalk.blue('Documents:'), chalk.white(metadata.documents));
+
+      let status;
+      switch (metadata.status) {
+        case 'UNSTABLE': {
+          status = chalk.yellow(metadata.status);
+          break;
+        }
+
+        case 'STABLE': {
+          status = chalk.green(metadata.status);
+          break;
+        }
+
+        case 'DEPRECATED': {
+          status = chalk.red(metadata.status);
+          break;
+        }
+
+        default: {
+          status = chalk.gray(metadata.status);
+          break;
+        }
+      }
+      console.log(chalk.white('Status:'), status);
 
       let version = config.LatestVersion;
       if (v) {
@@ -42,13 +65,19 @@ export function registerListCommand() {
 
       const modules = registry.tonion[version] as Version;
 
+      console.log(chalk.bold.cyan(' Available Traits:'));
+      let traitIndex = 1;
       for (const t in modules.traits) {
-        console.log(t);
+        console.log(chalk.blue(`  ${traitIndex}-${t}`));
+        traitIndex++;
       }
 
+      console.log(chalk.bold.cyan(' Available Contracts:'));
+      let contractIndex = 1;
       for (const c in modules.contracts) {
-        console.log(c);
+        console.log(chalk.blue(`  ${contractIndex}-${c}`));
+        contractIndex++;
       }
     })
-    .description('Shows the list of available modules from different providers.');
+    .description('Shows the list of available modules from different registries.');
 }
