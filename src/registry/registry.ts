@@ -1,24 +1,27 @@
-export type RegistryType = Record<
-  string,
-  {
-    Metadata: MetadataType;
-    Version: Record<string, VersionType>;
-  }
->;
+export interface Registry {
+  tonion: Tonion;
+}
 
-export type VersionType = {
-  Traits: Record<string, Record<string, string[]>>;
-  Contract: Record<string, Record<string, string[]>>;
-};
+export interface Tonion {
+  [version: string]: Version | Metadata;
+}
 
-export type MetadataType = {
-  Website: string;
-  Document: string;
-  Status: ProviderStatus;
-};
+export interface Version {
+  traits: Traits;
+  contracts: Contracts;
+}
 
-export enum ProviderStatus {
-  DEPRECATED = 'DEPRECATED',
-  UNSTABLE = 'UNSTABLE',
-  STABLE = 'STABLE',
+export interface Contracts {
+  [contracts: string]: string[];
+}
+
+export interface Traits {
+  [traits: string]: string[];
+}
+
+export interface Metadata {
+  status: string;
+  website: string;
+  documents: string;
+  name: string;
 }

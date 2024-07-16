@@ -1,52 +1,54 @@
 import { exit } from 'process';
 import { config } from '../config/config';
 import { program } from '../index';
-import { RegistryType } from '../registry/registry';
+import { Metadata, Version, Registry } from '../registry/registry';
+import chalk from 'chalk';
 
 export function registerListCommand() {
   program
-    .command('list')
-    .action(async () => {
-      const regResp = await fetch(config.RegistryAddress);
-      if (!regResp.ok) {
-        console.log("can't get registry info");
+    .command('list [version] [registry]')
+    .action(async (v: string, r: string) => {
+      let registryURL = config.RegistryAddress;
+      if (r) {
+        registryURL = r;
+      }
+
+      const getRegistryResponse = await fetch(registryURL)
+        .catch((e) => {
+          chalk.red.bold(`An error occurs while getting list:\n${e}`);
+        })
+        .then((res) => {
+          return res;
+        });
+
+      if (!getRegistryResponse?.ok) {
+        console.log(chalk.red(`Can't get registry info.\nCheck registry at: ${r}`));
         exit(1);
       }
 
-      const registry = (await regResp.json()) as RegistryType;
+      const registry = (await getRegistryResponse.json()) as Registry;
 
-      console.log(registry['tonion']);
+      const metadata = registry.tonion['metadata'] as Metadata;
 
-      // let num = 0;
-      // for (const providerKey in registry.Provider) {
-      //   console.log(providerKey)
+      console.log(`${metadata.name} contract registry:`);
+      console.log('Website:', metadata.website);
+      console.log('Documents:', metadata.documents);
+      console.log('Status:', metadata.status);
 
-      //   const provider = registry.Provider[providerKey];
+      let version = config.LatestVersion;
+      if (v) {
+        version = v;
+      }
 
-      //   console.log(`Provider ${num} info:`);
-      //   console.log('Name:', providerKey);
-      //   console.log('Website:', provider?.Metadata.Website);
-      //   console.log('Documents:', provider?.Metadata.Document);
-      //   console.log('Status:', provider?.Metadata.Status);
+      const modules = registry.tonion[version] as Version;
 
-      //   for (const versionsKey in provider?.Version) {
-      //     const version = provider.Version[versionsKey];
+      for (const t in modules.traits) {
+        console.log(t);
+      }
 
-      //     for (const traitsKey in version?.Traits) {
-      //       const traits = version.Traits[traitsKey];
-      //       for (const name in traits) {
-      //         console.log(name);
-      //       }
-      //     }
-
-      //     for (const contractsKey in version?.Contract) {
-      //       const contracts = version.Contract[contractsKey];
-      //       for (const name in contracts) {
-      //         console.log(name);
-      //       }
-      //     }
-      //   }
-      // }
+      for (const c in modules.contracts) {
+        console.log(c);
+      }
     })
     .description('Shows the list of available modules from different providers.');
 }

@@ -1,6 +1,7 @@
 {
     "tonion": {
         "metadata": {
+            "name":"Tonion",
             "status": "UNSTABLE",
             "website": "https://tonion.tech",
             "documents": "https://tonion.tech/docs"
